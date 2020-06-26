@@ -100,6 +100,7 @@ class SearchUserActivity : AppCompatActivity(), UserAdapter.ItemClickListener {
     }
 
     private fun getUserGithub() {
+        userList.clear()
         val users = Gson().fromJson(getString(R.string.user_data_json), UserGithubResponse::class.java)
         userList.addAll(users.users)
         userAdapter.setUserList(userList)
