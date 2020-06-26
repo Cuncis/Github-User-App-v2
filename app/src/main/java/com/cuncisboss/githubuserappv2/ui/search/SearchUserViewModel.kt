@@ -3,7 +3,6 @@ package com.cuncisboss.githubuserappv2.ui.search
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cuncisboss.githubuserappv2.model.SearchUserResponse
-import com.cuncisboss.githubuserappv2.ui.search.SearchUserRepository
 
 class SearchUserViewModel : ViewModel() {
     private val repository =

@@ -12,10 +12,6 @@ class DetailUserViewModel : ViewModel() {
         return repository.getDetailUser(username)
     }
 
-    fun onLoading(): MutableLiveData<Boolean> {
-        return repository.loading
-    }
-
     fun getMessage(): MutableLiveData<String> {
         return repository.message
     }

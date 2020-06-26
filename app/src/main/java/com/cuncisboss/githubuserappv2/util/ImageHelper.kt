@@ -5,7 +5,6 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.cuncisboss.githubuserappv2.R
-import com.cuncisboss.githubuserappv2.util.ImageHelper.Companion.getImageFromDrawable
 
 class ImageHelper {
     companion object {

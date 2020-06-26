@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_profil"
+            android:id="@+id/img_profil_foll"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_margin="6dp"
@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_name_foll"
             android:layout_width="45dp"
             android:layout_height="19dp"
             android:layout_marginStart="16dp"
@@ -30,7 +30,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_profil"
+            app:layout_constraintStart_toEndOf="@+id/img_profil_foll"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Name" />
 

@@ -14,7 +14,7 @@ data class SearchUserResponse(
 	val incompleteResults: Boolean,
 
 	@SerializedName("items")
-	val items: List<Items>
+	val items: List<UserGithub>
 ) : Parcelable
 
 @Parcelize

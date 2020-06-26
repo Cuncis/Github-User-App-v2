@@ -2,17 +2,15 @@ package com.cuncisboss.githubuserappv2.ui.detail.foll
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.cuncisboss.githubuserappv2.R
 import com.cuncisboss.githubuserappv2.adapter.UserFollAdapter
 import com.cuncisboss.githubuserappv2.ui.detail.DetailUserActivity
-import com.cuncisboss.githubuserappv2.util.Utils.Companion.hideLoadingBar
-import com.cuncisboss.githubuserappv2.util.Utils.Companion.showLoadingBar
+import com.cuncisboss.githubuserappv2.util.Utils.Companion.hideLoading
+import com.cuncisboss.githubuserappv2.util.Utils.Companion.showLoading
 import kotlinx.android.synthetic.main.fragment_following.*
 import kotlinx.android.synthetic.main.fragment_following.view.*
 
@@ -34,9 +32,9 @@ class FollowingFragment : Fragment(R.layout.fragment_following) {
         })
         follViewModel.onLoading().observe(viewLifecycleOwner, Observer { loading ->
             if (loading) {
-                progressBar.showLoadingBar(requireActivity())
+                progressBar.showLoading()
             } else {
-                progressBar.hideLoadingBar(requireActivity())
+                progressBar.hideLoading()
             }
         })
         follViewModel.getMessage().observe(viewLifecycleOwner, Observer { message ->

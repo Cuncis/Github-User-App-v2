@@ -38,8 +38,8 @@ class UserFollAdapter : RecyclerView.Adapter<UserFollAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        private val imgProfile = view.img_profil
-        private val tvUsername = view.tv_name
+        private val imgProfile = view.img_profil_foll
+        private val tvUsername = view.tv_name_foll
 
         fun bind(follModel: FollModel) {
             tvUsername.text = follModel.login

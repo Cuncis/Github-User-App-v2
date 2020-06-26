@@ -14,14 +14,12 @@ import com.cuncisboss.githubuserappv2.model.UserGithubResponse
 import com.cuncisboss.githubuserappv2.ui.detail.DetailUserActivity
 import com.cuncisboss.githubuserappv2.util.Constants.EXTRA_USER
 import com.cuncisboss.githubuserappv2.util.Constants.MAX_SIZE
-import com.cuncisboss.githubuserappv2.util.Utils.Companion.hideLoading
-import com.cuncisboss.githubuserappv2.util.Utils.Companion.showLoading
+import com.cuncisboss.githubuserappv2.util.Utils.Companion.hideLoadingBar
+import com.cuncisboss.githubuserappv2.util.Utils.Companion.showLoadingBar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_search_user.*
 
 class SearchUserActivity : AppCompatActivity(), UserAdapter.ItemClickListener {
-    private val TAG = "SearchUserActivity"
-
     private lateinit var userAdapter: UserAdapter
     private lateinit var userViewModel: SearchUserViewModel
 
@@ -57,8 +55,8 @@ class SearchUserActivity : AppCompatActivity(), UserAdapter.ItemClickListener {
                                 userTemp.clear()
                                 for (i in 0 until MAX_SIZE) {
                                     val userGithub = UserGithub()
-                                    userGithub.username = response.items[i].login
-                                    userGithub.avatar = response.items[i].avatarUrl
+                                    userGithub.login = response.items[i].login
+                                    userGithub.avatarUrl = response.items[i].avatarUrl
                                     userTemp.add(userGithub)
                                 }
                                 userAdapter.setUserList(userTemp)
@@ -67,8 +65,8 @@ class SearchUserActivity : AppCompatActivity(), UserAdapter.ItemClickListener {
                                 userTemp.clear()
                                 for (item in response.items) {
                                     val userGithub = UserGithub()
-                                    userGithub.username = item.login
-                                    userGithub.avatar = item.avatarUrl
+                                    userGithub.login = item.login
+                                    userGithub.avatarUrl = item.avatarUrl
                                     userTemp.add(userGithub)
                                 }
                                 userAdapter.setUserList(userTemp)
@@ -79,16 +77,6 @@ class SearchUserActivity : AppCompatActivity(), UserAdapter.ItemClickListener {
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-//                    val filteredUser = arrayListOf<UserGithub>()
-//
-//
-//                    for (item in userList) {
-//                        if (item.username.toLowerCase().contains(newText.toString().toLowerCase())) {
-//                            filteredUser.add(item)
-//                        }
-//                    }
-//
-//                    userAdapter.setUserList(filteredUser)
                     if (newText?.isEmpty()!!) {
                         getUserGithub()
                     }
@@ -99,22 +87,11 @@ class SearchUserActivity : AppCompatActivity(), UserAdapter.ItemClickListener {
     }
 
     private fun observeViewModel() {
-//        userViewModel.searchUser("sidiq").observe(this@SearchUserActivity, Observer { response ->
-//            val uss = arrayListOf<UserGithub>()
-//            for (item in response.items) {
-//                val userGithub = UserGithub()
-//                userGithub.username = item.login
-//                userGithub.avatar = item.avatarUrl
-//                userList.add(userGithub)
-//            }
-//            uss.addAll(userList)
-//            userAdapter.setUserList(uss)
-//        })
         userViewModel.onLoading().observe(this, Observer { loading ->
             if (loading) {
-                pb_userGithub.showLoading()
+                layout_progressBar.showLoadingBar(this)
             } else {
-                pb_userGithub.hideLoading()
+                layout_progressBar.hideLoadingBar(this)
             }
         })
         userViewModel.getMessage().observe(this, Observer { message ->

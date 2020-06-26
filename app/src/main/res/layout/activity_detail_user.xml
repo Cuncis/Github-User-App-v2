@@ -120,12 +120,4 @@
             app:tabTextColor="@android:color/white" />
     </androidx.viewpager.widget.ViewPager>
 
-    <include
-        android:id="@+id/layout_progressBar"
-        layout="@layout/layout_loading"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

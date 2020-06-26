@@ -35,5 +35,11 @@ data class UserGithub(
 	val repository: Int = 0,
 
 	@SerializedName("username")
-	var username: String = ""
+	var username: String = "",
+
+	@SerializedName("login")
+	var login: String = "",
+
+	@SerializedName("avatar_url")
+	var avatarUrl: String = ""
 ) : Parcelable

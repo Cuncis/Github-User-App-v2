@@ -8,7 +8,7 @@ import com.cuncisboss.githubuserappv2.ui.detail.foll.FollowingFragment
 
 class ViewPagerAdapter(fragmentManager: FragmentManager): FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    private val pages = listOf<Fragment>(
+    private val pages = listOf(
         FollowerFragment(),
         FollowingFragment()
     )

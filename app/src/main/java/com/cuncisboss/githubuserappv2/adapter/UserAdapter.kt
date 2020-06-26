@@ -9,22 +9,49 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cuncisboss.githubuserappv2.R
 import com.cuncisboss.githubuserappv2.model.UserGithub
 import com.cuncisboss.githubuserappv2.util.ImageHelper.Companion.getImageFromDrawable
+import com.cuncisboss.githubuserappv2.util.ImageHelper.Companion.getImageFromUrl
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.item_user.view.*
+import kotlinx.android.synthetic.main.item_user_foll.view.*
 
-class UserAdapter(val context: Context, val itemClickListener: ItemClickListener): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+class UserAdapter(val context: Context, val itemClickListener: ItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    companion object {
+        const val TYPE_USER = 1
+        const val TYPE_ITEM = 2
+    }
 
     private var userList = arrayListOf<UserGithub>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
-        return ViewHolder(view)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+        return if (viewType == TYPE_USER) {
+            UserViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
+            )
+        } else {
+            ItemViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.item_user_foll, parent, false)
+            )
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (getItemViewType(position) == TYPE_USER) {
+            (holder as UserViewHolder).bind(userList[position])
+        } else {
+            (holder as ItemViewHolder).bind(userList[position])
+        }
     }
 
     override fun getItemCount(): Int = userList.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(userList[position])
+    override fun getItemViewType(position: Int): Int {
+        return if (userList[position].avatar.contains("drawable")) {
+            TYPE_USER
+        } else {
+            TYPE_ITEM
+        }
     }
 
     fun setUserList(newUser: List<UserGithub>) {
@@ -33,7 +60,7 @@ class UserAdapter(val context: Context, val itemClickListener: ItemClickListener
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    inner class UserViewHolder(view: View): RecyclerView.ViewHolder(view) {
         private val tvName: TextView = view.tv_name
         private val tvRepo: TextView = view.tv_repo
         private val tvFollower: TextView = view.tv_follower
@@ -53,8 +80,21 @@ class UserAdapter(val context: Context, val itemClickListener: ItemClickListener
         }
     }
 
+    inner class ItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        private val tvName: TextView = view.tv_name_foll
+        private val imgPhoto: CircleImageView = view.img_profil_foll
+
+        fun bind(userGithub: UserGithub) {
+            tvName.text = userGithub.login
+            imgPhoto.getImageFromUrl(userGithub.avatarUrl)
+
+            itemView.setOnClickListener {
+                itemClickListener.onItemClick(userGithub)
+            }
+        }
+    }
+
     interface ItemClickListener {
         fun onItemClick(userGithub: UserGithub)
     }
-
 }
